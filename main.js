@@ -1,0 +1,36 @@
+function setup(){
+    canvas=createCanvas(350,300);
+    canvas.center;
+    background:white;
+    canvas.mouseReleased(classifyCanvas);
+    synth=window.speechSynthesis;
+}
+
+function clearCanvas(){
+    background:white;
+}
+
+function preload(){
+classifier=ml5.imageClassifier('DoodleNet');
+}
+
+function draw(){
+   strokeWeight(14);
+   stroke(0) ;
+   if(mouseIsPressed){
+       line(pmouseX,pmouseY,mouseX,mouseY);
+
+   }
+}
+function classifyCanvas(){
+classifier.classify(canvas,gotResult);
+
+}
+
+function gotResult(error,results){
+if(error){
+    console.error(error);
+    
+}
+console.log(results);
+}
